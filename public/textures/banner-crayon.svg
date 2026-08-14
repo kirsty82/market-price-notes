@@ -1,0 +1,301 @@
+<svg viewBox="0 0 800 280" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- ===== 蜡笔排线填充图案 ===== -->
+    <!-- 遮阳篷玫瑰色排线 45° -->
+    <pattern id="hatch-canopy" patternUnits="userSpaceOnUse" width="8" height="8" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#D4958A" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+      <line x1="0" y1="0" x2="0" y2="7" stroke="#C47D70" stroke-width="1.8" stroke-linecap="round" opacity="0.4"/>
+    </pattern>
+    <!-- 暗红排线（葡萄/苹果） -->
+    <pattern id="hatch-red" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-35)">
+      <line x1="0" y1="0" x2="0" y2="7" stroke="#C0392B" stroke-width="2.2" stroke-linecap="round" opacity="0.65"/>
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#A84A3B" stroke-width="1.6" stroke-linecap="round" opacity="0.35"/>
+    </pattern>
+    <!-- 番茄红排线 -->
+    <pattern id="hatch-tomato" patternUnits="userSpaceOnUse" width="8" height="8" patternTransform="rotate(50)">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#D48A7A" stroke-width="2.3" stroke-linecap="round" opacity="0.7"/>
+      <line x1="0" y1="0" x2="0" y2="7" stroke="#C07060" stroke-width="1.5" stroke-linecap="round" opacity="0.35"/>
+    </pattern>
+    <!-- 绿色排线（树叶/蔬菜） -->
+    <pattern id="hatch-green" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-40)">
+      <line x1="0" y1="0" x2="0" y2="7" stroke="#7D8B5E" stroke-width="2.2" stroke-linecap="round" opacity="0.65"/>
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#9BAA7A" stroke-width="1.6" stroke-linecap="round" opacity="0.4"/>
+    </pattern>
+    <!-- 橙色排线（橙子/柑橘） -->
+    <pattern id="hatch-orange" patternUnits="userSpaceOnUse" width="8" height="8" patternTransform="rotate(55)">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#E0986A" stroke-width="2.3" stroke-linecap="round" opacity="0.7"/>
+      <line x1="0" y1="0" x2="0" y2="7" stroke="#D08050" stroke-width="1.5" stroke-linecap="round" opacity="0.35"/>
+    </pattern>
+    <!-- 黄色排线（梨/柠檬） -->
+    <pattern id="hatch-yellow" patternUnits="userSpaceOnUse" width="8" height="8" patternTransform="rotate(-30)">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#DDBE9E" stroke-width="2.3" stroke-linecap="round" opacity="0.7"/>
+      <line x1="0" y1="0" x2="0" y2="7" stroke="#C8A15A" stroke-width="1.5" stroke-linecap="round" opacity="0.35"/>
+    </pattern>
+    <!-- 木色排线（木板箱） -->
+    <pattern id="hatch-wood" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(0)">
+      <line x1="0" y1="0" x2="6" y2="0" stroke="#B89A7A" stroke-width="2.2" stroke-linecap="round" opacity="0.65"/>
+      <line x1="0" y1="0" x2="5" y2="0" stroke="#C8A15A" stroke-width="1.5" stroke-linecap="round" opacity="0.35"/>
+    </pattern>
+    <!-- 树冠深绿排线 -->
+    <pattern id="hatch-tree" patternUnits="userSpaceOnUse" width="8" height="8" patternTransform="rotate(25)">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#6B7A4E" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+      <line x1="0" y1="0" x2="0" y2="7" stroke="#8A9A6E" stroke-width="1.8" stroke-linecap="round" opacity="0.35"/>
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#5B6A3E" stroke-width="1.2" stroke-linecap="round" opacity="0.2"/>
+    </pattern>
+    <!-- 台秤铜色排线 -->
+    <pattern id="hatch-bronze" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-50)">
+      <line x1="0" y1="0" x2="0" y2="7" stroke="#9B8E7A" stroke-width="2.2" stroke-linecap="round" opacity="0.65"/>
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#B5A99C" stroke-width="1.5" stroke-linecap="round" opacity="0.35"/>
+    </pattern>
+    <!-- 地面排线 -->
+    <pattern id="hatch-ground" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(0)">
+      <line x1="0" y1="0" x2="6" y2="0" stroke="#8E8276" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+      <line x1="0" y1="0" x2="5" y2="0" stroke="#B5A99C" stroke-width="1.3" stroke-linecap="round" opacity="0.3"/>
+    </pattern>
+
+    <!-- ===== 纸张纹理 ===== -->
+    <filter id="paper-noise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.95  0 0 0 0 0.95  0 0 0 0 0.95  0 0 0 0.06 0" in="noise" result="coloredNoise"/>
+      <feBlend mode="multiply" in="SourceGraphic" in2="coloredNoise"/>
+    </filter>
+
+    <!-- 蜡笔轮廓风格：用 stroke-dasharray 和 stroke-linecap 模拟不完美笔触 -->
+    <style>
+      .crayon-outline { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .crayon-fill { stroke-linecap: round; stroke-linejoin: round; }
+      .crayon-layer1 { opacity: 0.75; }
+      .crayon-layer2 { opacity: 0.45; }
+      .crayon-layer3 { opacity: 0.25; }
+    </style>
+  </defs>
+
+  <!-- ===== 背景 ===== -->
+  <rect width="800" height="280" fill="#FFFEF7"/>
+  <!-- 极轻纸张噪点叠加 -->
+  <rect width="800" height="280" fill="url(#hatch-ground)" opacity="0.04"/>
+
+  <!-- ===== 背景：果树（左侧） ===== -->
+  <g id="trees">
+    <!-- 大树干 -->
+    <path class="crayon-outline crayon-layer1" stroke="#8E8276" stroke-width="2.8" d="M 55,190 Q 52,165 54,140 Q 58,120 56,100"/>
+    <path class="crayon-outline crayon-layer2" stroke="#9B8E7A" stroke-width="2.0" d="M 54,190 Q 51,163 53,138 Q 57,118 55,100"/>
+    <!-- 大树冠轮廓 — 云朵状，蜡笔抖动 -->
+    <path class="crayon-outline crayon-layer1" stroke="#6B7A4E" stroke-width="2.8" d="M 15,110 Q 12,95 25,85 Q 30,72 45,78 Q 55,68 68,78 Q 80,70 90,80 Q 100,72 105,85 Q 115,82 112,98 Q 118,108 108,115 Q 110,128 98,130 Q 92,140 78,135 Q 65,142 50,135 Q 38,140 28,130 Q 18,125 15,110 Z"/>
+    <path class="crayon-outline crayon-layer2" stroke="#8A9A6E" stroke-width="2.0" d="M 14,108 Q 11,93 24,83 Q 29,70 44,76 Q 54,66 67,76 Q 79,68 89,78 Q 99,70 104,83 Q 114,80 111,96 Q 117,106 107,113 Q 109,126 97,128 Q 91,138 77,133 Q 64,140 49,133 Q 37,138 27,128 Q 17,123 14,108 Z"/>
+    <!-- 树冠填充（排线） -->
+    <path class="crayon-fill" fill="url(#hatch-tree)" d="M 15,110 Q 12,95 25,85 Q 30,72 45,78 Q 55,68 68,78 Q 80,70 90,80 Q 100,72 105,85 Q 115,82 112,98 Q 118,108 108,115 Q 110,128 98,130 Q 92,140 78,135 Q 65,142 50,135 Q 38,140 28,130 Q 18,125 15,110 Z"/>
+    <!-- 树冠红点（果实） -->
+    <circle cx="35" cy="100" r="4" fill="url(#hatch-red)" stroke="#C0392B" stroke-width="1.5" stroke-dasharray="2 3"/>
+    <circle cx="55" cy="92" r="3.5" fill="url(#hatch-red)" stroke="#C0392B" stroke-width="1.5" stroke-dasharray="2 3"/>
+    <circle cx="72" cy="98" r="4.5" fill="url(#hatch-red)" stroke="#C0392B" stroke-width="1.5" stroke-dasharray="2 3"/>
+    <circle cx="48" cy="110" r="3.8" fill="url(#hatch-red)" stroke="#C0392B" stroke-width="1.5" stroke-dasharray="2 3"/>
+    <circle cx="85" cy="95" r="3.5" fill="url(#hatch-red)" stroke="#C0392B" stroke-width="1.5" stroke-dasharray="2 3"/>
+
+    <!-- 小树 -->
+    <path class="crayon-outline crayon-layer1" stroke="#8E8276" stroke-width="2.5" d="M 95,200 Q 92,180 96,160"/>
+    <path class="crayon-outline crayon-layer1" stroke="#6B7A4E" stroke-width="2.5" d="M 70,155 Q 68,142 78,135 Q 85,125 96,132 Q 108,124 115,135 Q 125,130 120,145 Q 126,152 116,155 Q 110,162 96,158 Q 82,162 70,155 Z"/>
+    <path class="crayon-outline crayon-layer2" stroke="#8A9A6E" stroke-width="1.8" d="M 69,153 Q 67,140 77,133 Q 84,123 95,130 Q 107,122 114,133 Q 124,128 119,143 Q 125,150 115,153 Q 109,160 95,156 Q 81,160 69,153 Z"/>
+    <path class="crayon-fill" fill="url(#hatch-tree)" d="M 70,155 Q 68,142 78,135 Q 85,125 96,132 Q 108,124 115,135 Q 125,130 120,145 Q 126,152 116,155 Q 110,162 96,158 Q 82,162 70,155 Z"/>
+    <circle cx="82" cy="142" r="3.2" fill="url(#hatch-red)" stroke="#C0392B" stroke-width="1.5" stroke-dasharray="2 3"/>
+    <circle cx="100" cy="138" r="3.5" fill="url(#hatch-red)" stroke="#C0392B" stroke-width="1.5" stroke-dasharray="2 3"/>
+    <circle cx="110" cy="145" r="3" fill="url(#hatch-red)" stroke="#C0392B" stroke-width="1.5" stroke-dasharray="2 3"/>
+  </g>
+
+  <!-- ===== 遮阳篷 ===== -->
+  <g id="canopy">
+    <!-- 篷顶轮廓 -->
+    <path class="crayon-outline crayon-layer1" stroke="#C47D70" stroke-width="2.8" d="M 100,65 Q 200,45 350,42 Q 500,38 560,55"/>
+    <path class="crayon-outline crayon-layer2" stroke="#D4958A" stroke-width="2.0" d="M 100,66 Q 200,47 350,44 Q 500,40 560,56"/>
+    <!-- 篷底波浪边 -->
+    <path class="crayon-outline crayon-layer1" stroke="#C47D70" stroke-width="2.8" d="M 100,65 Q 105,80 115,65 Q 125,82 135,65 Q 145,83 155,65 Q 165,84 175,65 Q 185,85 195,65 Q 205,86 215,65 Q 225,87 235,65 Q 245,86 255,65 Q 265,85 275,65 Q 285,84 295,65 Q 305,83 315,65 Q 325,82 335,65 Q 345,81 355,65 Q 365,82 375,65 Q 385,83 395,65 Q 405,84 415,65 Q 425,85 435,65 Q 445,86 455,65 Q 465,85 475,65 Q 485,84 495,65 Q 505,83 515,65 Q 525,82 535,65 Q 545,81 555,65 Q 560,72 560,55"/>
+    <path class="crayon-outline crayon-layer2" stroke="#D4958A" stroke-width="2.0" d="M 100,66 Q 105,81 115,66 Q 125,83 135,66 Q 145,84 155,66 Q 165,85 175,66 Q 185,86 195,66 Q 205,87 215,66 Q 225,88 235,66 Q 245,87 255,66 Q 265,86 275,66 Q 285,85 295,66 Q 305,84 315,66 Q 325,83 335,66 Q 345,82 355,66 Q 365,83 375,66 Q 385,84 395,66 Q 405,85 415,66 Q 425,86 435,66 Q 445,87 455,66 Q 465,86 475,66 Q 485,85 495,66 Q 505,84 515,66 Q 525,83 535,66 Q 545,82 555,66 Q 560,73 560,56"/>
+    <!-- 遮阳篷条纹填充 -->
+    <path class="crayon-fill" fill="url(#hatch-canopy)" d="M 100,65 Q 200,45 350,42 Q 500,38 560,55 L 560,65 Q 555,81 545,65 Q 535,82 525,65 Q 515,83 505,65 Q 495,84 485,65 Q 475,85 465,65 Q 455,86 445,65 Q 435,85 425,65 Q 415,84 405,65 Q 395,83 385,65 Q 375,82 365,65 Q 355,81 345,65 Q 335,82 325,65 Q 315,83 305,65 Q 295,84 285,65 Q 275,85 265,65 Q 255,86 245,65 Q 235,87 225,65 Q 215,86 205,65 Q 195,85 185,65 Q 175,84 165,65 Q 155,83 145,65 Q 135,82 125,65 Q 115,81 105,65 Q 100,72 100,65 Z"/>
+    <!-- 条纹线（玫瑰色间隔） -->
+    <path class="crayon-outline crayon-layer1" stroke="#D4958A" stroke-width="2.5" stroke-dasharray="3 5" d="M 160,48 Q 162,60 160,78"/>
+    <path class="crayon-outline crayon-layer1" stroke="#D4958A" stroke-width="2.5" stroke-dasharray="3 5" d="M 260,44 Q 262,58 260,80"/>
+    <path class="crayon-outline crayon-layer1" stroke="#D4958A" stroke-width="2.5" stroke-dasharray="3 5" d="M 360,42 Q 362,56 360,79"/>
+    <path class="crayon-outline crayon-layer1" stroke="#D4958A" stroke-width="2.5" stroke-dasharray="3 5" d="M 460,40 Q 462,55 460,78"/>
+    <path class="crayon-outline crayon-layer1" stroke="#D4958A" stroke-width="2.5" stroke-dasharray="3 5" d="M 210,46 Q 212,59 210,79"/>
+    <path class="crayon-outline crayon-layer1" stroke="#D4958A" stroke-width="2.5" stroke-dasharray="3 5" d="M 310,43 Q 312,57 310,79"/>
+    <path class="crayon-outline crayon-layer1" stroke="#D4958A" stroke-width="2.5" stroke-dasharray="3 5" d="M 410,41 Q 412,56 410,78"/>
+    <path class="crayon-outline crayon-layer1" stroke="#D4958A" stroke-width="2.5" stroke-dasharray="3 5" d="M 510,39 Q 512,54 510,77"/>
+    <!-- 篷顶装饰线 -->
+    <path class="crayon-outline crayon-layer1" stroke="#C47D70" stroke-width="2.0" stroke-dasharray="4 6" d="M 110,68 Q 245,48 380,46 Q 515,42 550,58"/>
+  </g>
+
+  <!-- ===== 摊位立柱 ===== -->
+  <g id="posts">
+    <!-- 左柱 -->
+    <path class="crayon-outline crayon-layer1" stroke="#B89A7A" stroke-width="3.0" d="M 115,72 Q 112,120 114,170 Q 116,200 113,218"/>
+    <path class="crayon-outline crayon-layer2" stroke="#C8A15A" stroke-width="2.2" d="M 116,72 Q 113,120 115,170 Q 117,200 114,218"/>
+    <path class="crayon-fill" fill="url(#hatch-wood)" d="M 110,72 Q 107,120 109,170 Q 111,200 108,218 L 118,218 Q 120,200 119,170 Q 117,120 120,72 Z"/>
+    <!-- 右柱 -->
+    <path class="crayon-outline crayon-layer1" stroke="#B89A7A" stroke-width="3.0" d="M 545,58 Q 542,110 544,160 Q 546,200 543,228"/>
+    <path class="crayon-outline crayon-layer2" stroke="#C8A15A" stroke-width="2.2" d="M 546,58 Q 543,110 545,160 Q 547,200 544,228"/>
+    <path class="crayon-fill" fill="url(#hatch-wood)" d="M 540,58 Q 537,110 539,160 Q 541,200 538,228 L 548,228 Q 550,200 549,160 Q 547,110 550,58 Z"/>
+  </g>
+
+  <!-- ===== 悬挂农产品 ===== -->
+  <g id="hanging">
+    <!-- 左侧挂绳 -->
+    <path class="crayon-outline crayon-layer1" stroke="#8E8276" stroke-width="1.8" d="M 155,68 Q 153,78 156,88"/>
+    <path class="crayon-outline crayon-layer1" stroke="#8E8276" stroke-width="1.8" d="M 185,66 Q 183,76 186,86"/>
+    <path class="crayon-outline crayon-layer1" stroke="#8E8276" stroke-width="1.8" d="M 215,65 Q 217,75 214,85"/>
+    <!-- 大蒜串 -->
+    <ellipse cx="156" cy="95" rx="9" ry="7" fill="url(#hatch-yellow)" stroke="#DDBE9E" stroke-width="2.2" stroke-dasharray="3 4"/>
+    <ellipse cx="158" cy="103" rx="9" ry="7" fill="url(#hatch-yellow)" stroke="#DDBE9E" stroke-width="2.2" stroke-dasharray="3 4"/>
+    <ellipse cx="155" cy="111" rx="9" ry="7" fill="url(#hatch-yellow)" stroke="#DDBE9E" stroke-width="2.2" stroke-dasharray="3 4"/>
+    <ellipse cx="157" cy="119" rx="8" ry="6" fill="url(#hatch-yellow)" stroke="#DDBE9E" stroke-width="2.0" stroke-dasharray="3 4"/>
+    <!-- 药草/绿叶 -->
+    <path class="crayon-outline crayon-layer1" stroke="#7D8B5E" stroke-width="2.2" d="M 185,90 Q 178,85 180,78 Q 184,82 188,86"/>
+    <path class="crayon-outline crayon-layer1" stroke="#7D8B5E" stroke-width="2.2" d="M 187,90 Q 192,83 194,76 Q 190,82 186,88"/>
+    <path class="crayon-outline crayon-layer1" stroke="#7D8B5E" stroke-width="2.2" d="M 183,92 Q 176,90 175,84 Q 180,88 184,90"/>
+    <path class="crayon-fill" fill="url(#hatch-green)" d="M 185,90 Q 178,85 180,78 Q 184,82 188,86 Q 192,83 194,76 Q 190,82 186,88 Q 176,90 175,84 Q 180,88 184,90 Z"/>
+    <!-- 葡萄串 -->
+    <path class="crayon-outline crayon-layer1" stroke="#8E8276" stroke-width="1.5" d="M 215,85 Q 213,92 215,98"/>
+    <circle cx="210" cy="100" r="7" fill="url(#hatch-red)" stroke="#A84A3B" stroke-width="2.2" stroke-dasharray="3 4"/>
+    <circle cx="220" cy="100" r="7" fill="url(#hatch-red)" stroke="#A84A3B" stroke-width="2.2" stroke-dasharray="3 4"/>
+    <circle cx="207" cy="110" r="7" fill="url(#hatch-red)" stroke="#A84A3B" stroke-width="2.2" stroke-dasharray="3 4"/>
+    <circle cx="217" cy="110" r="7" fill="url(#hatch-red)" stroke="#A84A3B" stroke-width="2.2" stroke-dasharray="3 4"/>
+    <circle cx="224" cy="110" r="7" fill="url(#hatch-red)" stroke="#A84A3B" stroke-width="2.2" stroke-dasharray="3 4"/>
+    <circle cx="210" cy="120" r="7" fill="url(#hatch-red)" stroke="#A84A3B" stroke-width="2.2" stroke-dasharray="3 4"/>
+    <circle cx="220" cy="120" r="7" fill="url(#hatch-red)" stroke="#A84A3B" stroke-width="2.2" stroke-dasharray="3 4"/>
+    <circle cx="215" cy="128" r="6" fill="url(#hatch-red)" stroke="#A84A3B" stroke-width="2.0" stroke-dasharray="3 4"/>
+    <!-- 葡萄叶 -->
+    <path class="crayon-outline crayon-layer1" stroke="#7D8B5E" stroke-width="2.0" d="M 215,92 Q 208,88 210,82 Q 216,86 220,90"/>
+    <path class="crayon-fill" fill="url(#hatch-green)" d="M 215,92 Q 208,88 210,82 Q 216,86 220,90 Z"/>
+  </g>
+
+  <!-- ===== 展示台面 ===== -->
+  <g id="counter">
+    <path class="crayon-outline crayon-layer1" stroke="#B89A7A" stroke-width="3.0" d="M 100,150 Q 200,146 350,145 Q 500,144 558,148"/>
+    <path class="crayon-outline crayon-layer2" stroke="#C8A15A" stroke-width="2.2" d="M 100,151 Q 200,147 350,146 Q 500,145 558,149"/>
+    <path class="crayon-fill" fill="url(#hatch-wood)" d="M 100,150 Q 200,146 350,145 Q 500,144 558,148 L 560,158 Q 500,154 350,155 Q 200,156 98,160 Z"/>
+    <!-- 台面木纹线 -->
+    <path class="crayon-outline" stroke="#B89A7A" stroke-width="1.8" stroke-dasharray="5 7" opacity="0.5" d="M 120,153 Q 250,149 380,148 Q 500,147 545,150"/>
+    <path class="crayon-outline" stroke="#B89A7A" stroke-width="1.5" stroke-dasharray="4 8" opacity="0.4" d="M 110,156 Q 240,152 370,151 Q 500,150 552,153"/>
+  </g>
+
+  <!-- ===== 木板箱（台上） ===== -->
+  <g id="crates">
+    <!-- 箱1：黄色水果（梨/柠檬） - 最左 -->
+    <path class="crayon-outline crayon-layer1" stroke="#B89A7A" stroke-width="2.5" d="M 125,148 L 125,132 Q 125,125 135,123 L 175,122 Q 185,124 185,132 L 185,148"/>
+    <path class="crayon-outline crayon-layer2" stroke="#C8A15A" stroke-width="1.8" d="M 126,148 L 126,132 Q 126,126 136,124 L 174,123 Q 184,125 184,132 L 184,148"/>
+    <path class="crayon-fill" fill="url(#hatch-wood)" d="M 125,148 L 125,132 Q 125,125 135,123 L 175,122 Q 185,124 185,132 L 185,148 Z"/>
+    <!-- 箱1横木纹 -->
+    <path class="crayon-outline" stroke="#B89A7A" stroke-width="1.5" stroke-dasharray="3 6" opacity="0.5" d="M 125,138 L 185,137"/>
+    <path class="crayon-outline" stroke="#B89A7A" stroke-width="1.5" stroke-dasharray="3 6" opacity="0.5" d="M 125,143 L 185,142"/>
+    <!-- 箱1水果（黄色） -->
+    <circle cx="140" cy="131" r="8" fill="url(#hatch-yellow)" stroke="#DDBE9E" stroke-width="2.2" stroke-dasharray="3 5"/>
+    <circle cx="155" cy="129" r="8" fill="url(#hatch-yellow)" stroke="#DDBE9E" stroke-width="2.2" stroke-dasharray="3 5"/>
+    <circle cx="170" cy="130" r="8" fill="url(#hatch-yellow)" stroke="#DDBE9E" stroke-width="2.2" stroke-dasharray="3 5"/>
+    <circle cx="148" cy="138" r="8" fill="url(#hatch-yellow)" stroke="#DDBE9E" stroke-width="2.2" stroke-dasharray="3 5"/>
+    <circle cx="163" cy="137" r="8" fill="url(#hatch-yellow)" stroke="#DDBE9E" stroke-width="2.2" stroke-dasharray="3 5"/>
+
+    <!-- 箱2：红色水果（番茄/苹果） -->
+    <path class="crayon-outline crayon-layer1" stroke="#B89A7A" stroke-width="2.5" d="M 200,147 L 200,130 Q 200,122 210,120 L 255,119 Q 265,121 265,130 L 265,147"/>
+    <path class="crayon-outline crayon-layer2" stroke="#C8A15A" stroke-width="1.8" d="M 201,147 L 201,130 Q 201,123 211,121 L 254,120 Q 264,122 264,130 L 264,147"/>
+    <path class="crayon-fill" fill="url(#hatch-wood)" d="M 200,147 L 200,130 Q 200,122 210,120 L 255,119 Q 265,121 265,130 L 265,147 Z"/>
+    <path class="crayon-outline" stroke="#B89A7A" stroke-width="1.5" stroke-dasharray="3 6" opacity="0.5" d="M 200,137 L 265,135"/>
+    <path class="crayon-outline" stroke="#B89A7A" stroke-width="1.5" stroke-dasharray="3 6" opacity="0.5" d="M 200,142 L 265,141"/>
+    <!-- 箱2水果（红色） -->
+    <circle cx="215" cy="128" r="9" fill="url(#hatch-tomato)" stroke="#D48A7A" stroke-width="2.3" stroke-dasharray="3 5"/>
+    <circle cx="232" cy="126" r="9" fill="url(#hatch-tomato)" stroke="#D48A7A" stroke-width="2.3" stroke-dasharray="3 5"/>
+    <circle cx="249" cy="127" r="9" fill="url(#hatch-tomato)" stroke="#D48A7A" stroke-width="2.3" stroke-dasharray="3 5"/>
+    <circle cx="223" cy="137" r="9" fill="url(#hatch-tomato)" stroke="#D48A7A" stroke-width="2.3" stroke-dasharray="3 5"/>
+    <circle cx="240" cy="135" r="9" fill="url(#hatch-tomato)" stroke="#D48A7A" stroke-width="2.3" stroke-dasharray="3 5"/>
+    <circle cx="256" cy="136" r="8" fill="url(#hatch-tomato)" stroke="#D48A7A" stroke-width="2.0" stroke-dasharray="3 5"/>
+
+    <!-- 箱3：绿色水果（青苹果） -->
+    <path class="crayon-outline crayon-layer1" stroke="#B89A7A" stroke-width="2.5" d="M 280,146 L 280,131 Q 280,123 290,121 L 330,120 Q 340,122 340,131 L 340,146"/>
+    <path class="crayon-outline crayon-layer2" stroke="#C8A15A" stroke-width="1.8" d="M 281,146 L 281,131 Q 281,124 291,122 L 329,121 Q 339,123 339,131 L 339,146"/>
+    <path class="crayon-fill" fill="url(#hatch-wood)" d="M 280,146 L 280,131 Q 280,123 290,121 L 330,120 Q 340,122 340,131 L 340,146 Z"/>
+    <path class="crayon-outline" stroke="#B89A7A" stroke-width="1.5" stroke-dasharray="3 6" opacity="0.5" d="M 280,136 L 340,134"/>
+    <path class="crayon-outline" stroke="#B89A7A" stroke-width="1.5" stroke-dasharray="3 6" opacity="0.5" d="M 280,141 L 340,140"/>
+    <!-- 箱3水果（绿色） -->
+    <circle cx="295" cy="129" r="8" fill="url(#hatch-green)" stroke="#7D8B5E" stroke-width="2.2" stroke-dasharray="3 5"/>
+    <circle cx="310" cy="127" r="8" fill="url(#hatch-green)" stroke="#7D8B5E" stroke-width="2.2" stroke-dasharray="3 5"/>
+    <circle cx="325" cy="128" r="8" fill="url(#hatch-green)" stroke="#7D8B5E" stroke-width="2.2" stroke-dasharray="3 5"/>
+    <circle cx="302" cy="137" r="8" fill="url(#hatch-green)" stroke="#7D8B5E" stroke-width="2.2" stroke-dasharray="3 5"/>
+    <circle cx="318" cy="136" r="8" fill="url(#hatch-green)" stroke="#7D8B5E" stroke-width="2.2" stroke-dasharray="3 5"/>
+
+    <!-- 箱4：橙色水果（橙子/柑橘） -->
+    <path class="crayon-outline crayon-layer1" stroke="#B89A7A" stroke-width="2.5" d="M 355,146 L 355,130 Q 355,122 365,120 L 410,119 Q 420,121 420,130 L 420,146"/>
+    <path class="crayon-outline crayon-layer2" stroke="#C8A15A" stroke-width="1.8" d="M 356,146 L 356,130 Q 356,123 366,121 L 409,120 Q 419,122 419,130 L 419,146"/>
+    <path class="crayon-fill" fill="url(#hatch-wood)" d="M 355,146 L 355,130 Q 355,122 365,120 L 410,119 Q 420,121 420,130 L 420,146 Z"/>
+    <path class="crayon-outline" stroke="#B89A7A" stroke-width="1.5" stroke-dasharray="3 6" opacity="0.5" d="M 355,136 L 420,134"/>
+    <path class="crayon-outline" stroke="#B89A7A" stroke-width="1.5" stroke-dasharray="3 6" opacity="0.5" d="M 355,141 L 420,140"/>
+    <!-- 箱4水果（橙色） -->
+    <circle cx="370" cy="128" r="9" fill="url(#hatch-orange)" stroke="#E0986A" stroke-width="2.3" stroke-dasharray="3 5"/>
+    <circle cx="388" cy="126" r="9" fill="url(#hatch-orange)" stroke="#E0986A" stroke-width="2.3" stroke-dasharray="3 5"/>
+    <circle cx="405" cy="127" r="9" fill="url(#hatch-orange)" stroke="#E0986A" stroke-width="2.3" stroke-dasharray="3 5"/>
+    <circle cx="378" cy="137" r="9" fill="url(#hatch-orange)" stroke="#E0986A" stroke-width="2.3" stroke-dasharray="3 5"/>
+    <circle cx="396" cy="135" r="9" fill="url(#hatch-orange)" stroke="#E0986A" stroke-width="2.3" stroke-dasharray="3 5"/>
+
+    <!-- 箱5：右侧额外箱（黄色水果） -->
+    <path class="crayon-outline crayon-layer1" stroke="#B89A7A" stroke-width="2.5" d="M 435,147 L 435,133 Q 435,126 445,124 L 480,123 Q 490,125 490,133 L 490,147"/>
+    <path class="crayon-outline crayon-layer2" stroke="#C8A15A" stroke-width="1.8" d="M 436,147 L 436,133 Q 436,127 446,125 L 479,124 Q 489,126 489,133 L 489,147"/>
+    <path class="crayon-fill" fill="url(#hatch-wood)" d="M 435,147 L 435,133 Q 435,126 445,124 L 480,123 Q 490,125 490,133 L 490,147 Z"/>
+    <path class="crayon-outline" stroke="#B89A7A" stroke-width="1.5" stroke-dasharray="3 6" opacity="0.5" d="M 435,138 L 490,136"/>
+    <circle cx="450" cy="131" r="8" fill="url(#hatch-yellow)" stroke="#DDBE9E" stroke-width="2.2" stroke-dasharray="3 5"/>
+    <circle cx="465" cy="130" r="8" fill="url(#hatch-yellow)" stroke="#DDBE9E" stroke-width="2.2" stroke-dasharray="3 5"/>
+    <circle cx="478" cy="131" r="8" fill="url(#hatch-yellow)" stroke="#DDBE9E" stroke-width="2.2" stroke-dasharray="3 5"/>
+    <circle cx="457" cy="139" r="8" fill="url(#hatch-yellow)" stroke="#DDBE9E" stroke-width="2.2" stroke-dasharray="3 5"/>
+    <circle cx="472" cy="138" r="8" fill="url(#hatch-yellow)" stroke="#DDBE9E" stroke-width="2.2" stroke-dasharray="3 5"/>
+  </g>
+
+  <!-- ===== 台秤（右侧） ===== -->
+  <g id="scale">
+    <!-- 底座 -->
+    <path class="crayon-outline crayon-layer1" stroke="#9B8E7A" stroke-width="2.8" d="M 580,210 Q 590,205 600,208 Q 610,205 620,210"/>
+    <path class="crayon-outline crayon-layer2" stroke="#B5A99C" stroke-width="2.0" d="M 580,211 Q 590,206 600,209 Q 610,206 620,211"/>
+    <path class="crayon-fill" fill="url(#hatch-bronze)" d="M 580,210 Q 590,205 600,208 Q 610,205 620,210 L 618,218 Q 610,220 600,218 Q 590,220 582,218 Z"/>
+    <!-- 立柱 -->
+    <path class="crayon-outline crayon-layer1" stroke="#9B8E7A" stroke-width="2.8" d="M 595,208 L 593,140 Q 593,130 598,125"/>
+    <path class="crayon-outline crayon-layer2" stroke="#B5A99C" stroke-width="2.0" d="M 596,208 L 594,140 Q 594,131 599,126"/>
+    <path class="crayon-fill" fill="url(#hatch-bronze)" d="M 592,208 L 590,140 Q 590,130 595,125 L 601,126 Q 600,130 600,140 L 602,208 Z"/>
+    <!-- 秤盘 -->
+    <ellipse cx="598" cy="118" rx="35" ry="8" fill="none" stroke="#9B8E7A" stroke-width="2.8" stroke-dasharray="3 5"/>
+    <ellipse cx="598" cy="118" rx="35" ry="8" fill="none" stroke="#B5A99C" stroke-width="2.0" stroke-dasharray="3 5"/>
+    <ellipse cx="598" cy="118" rx="34" ry="7" fill="url(#hatch-bronze)" opacity="0.5"/>
+    <!-- 秤盘支架 -->
+    <path class="crayon-outline crayon-layer1" stroke="#9B8E7A" stroke-width="2.2" d="M 575,125 L 563,118"/>
+    <path class="crayon-outline crayon-layer1" stroke="#9B8E7A" stroke-width="2.2" d="M 621,125 L 633,118"/>
+    <path class="crayon-outline" stroke="#9B8E7A" stroke-width="1.8" stroke-dasharray="2 4" d="M 595,125 L 595,118"/>
+    <!-- 刻度盘 -->
+    <circle cx="598" cy="145" r="28" fill="url(#hatch-bronze)" stroke="#9B8E7A" stroke-width="2.8" stroke-dasharray="3 5"/>
+    <circle cx="598" cy="145" r="28" fill="none" stroke="#B5A99C" stroke-width="2.0" stroke-dasharray="3 5"/>
+    <circle cx="598" cy="145" r="26" fill="none" stroke="#9B8E7A" stroke-width="1.5" stroke-dasharray="2 4"/>
+    <circle cx="598" cy="145" r="8" fill="none" stroke="#9B8E7A" stroke-width="2.2" stroke-dasharray="2 3"/>
+    <!-- 刻度线 -->
+    <line x1="598" y1="119" x2="598" y2="124" stroke="#9B8E7A" stroke-width="2.2" stroke-dasharray="2 2"/>
+    <line x1="620" y1="130" x2="617" y2="134" stroke="#9B8E7A" stroke-width="2.2" stroke-dasharray="2 2"/>
+    <line x1="626" y1="145" x2="621" y2="145" stroke="#9B8E7A" stroke-width="2.2" stroke-dasharray="2 2"/>
+    <line x1="620" y1="160" x2="617" y2="156" stroke="#9B8E7A" stroke-width="2.2" stroke-dasharray="2 2"/>
+    <line x1="576" y1="130" x2="579" y2="134" stroke="#9B8E7A" stroke-width="2.2" stroke-dasharray="2 2"/>
+    <line x1="570" y1="145" x2="575" y2="145" stroke="#9B8E7A" stroke-width="2.2" stroke-dasharray="2 2"/>
+    <line x1="576" y1="160" x2="579" y2="156" stroke="#9B8E7A" stroke-width="2.2" stroke-dasharray="2 2"/>
+    <!-- 指针 -->
+    <line x1="598" y1="145" x2="585" y2="138" stroke="#A84A3B" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="598" y1="145" x2="612" y2="150" stroke="#A84A3B" stroke-width="2.0" stroke-linecap="round"/>
+  </g>
+
+  <!-- ===== 地面 ===== -->
+  <g id="ground">
+    <path class="crayon-outline crayon-layer1" stroke="#8E8276" stroke-width="2.5" d="M 15,222 Q 100,218 200,220 Q 350,216 500,219 Q 600,217 700,220 Q 750,218 780,222"/>
+    <path class="crayon-outline crayon-layer2" stroke="#B5A99C" stroke-width="1.8" d="M 15,223 Q 100,219 200,221 Q 350,217 500,220 Q 600,218 700,221 Q 750,219 780,223"/>
+    <path class="crayon-fill" fill="url(#hatch-ground)" d="M 15,222 Q 100,218 200,220 Q 350,216 500,219 Q 600,217 700,220 Q 750,218 780,222 L 780,235 Q 700,233 600,235 Q 500,232 350,234 Q 200,233 100,235 Q 50,234 15,235 Z"/>
+    <!-- 草丛 -->
+    <path class="crayon-outline" stroke="#7D8B5E" stroke-width="2.0" stroke-dasharray="3 5" fill="none" d="M 40,222 Q 38,210 42,205 M 44,222 Q 46,212 43,207 M 48,222 Q 50,214 47,209"/>
+    <path class="crayon-outline" stroke="#7D8B5E" stroke-width="2.0" stroke-dasharray="3 5" fill="none" d="M 140,220 Q 138,208 142,203 M 144,220 Q 146,210 143,205 M 148,220 Q 150,212 147,207"/>
+    <path class="crayon-outline" stroke="#7D8B5E" stroke-width="2.0" stroke-dasharray="3 5" fill="none" d="M 300,219 Q 298,207 302,202 M 304,219 Q 306,209 303,204 M 308,219 Q 310,211 307,206"/>
+    <path class="crayon-outline" stroke="#7D8B5E" stroke-width="2.0" stroke-dasharray="3 5" fill="none" d="M 520,219 Q 518,207 522,202 M 524,219 Q 526,209 523,204 M 528,219 Q 530,211 527,206"/>
+    <path class="crayon-outline" stroke="#7D8B5E" stroke-width="2.0" stroke-dasharray="3 5" fill="none" d="M 680,220 Q 678,208 682,203 M 684,220 Q 686,210 683,205 M 688,220 Q 690,212 687,207"/>
+    <path class="crayon-outline" stroke="#7D8B5E" stroke-width="2.0" stroke-dasharray="3 5" fill="none" d="M 750,221 Q 748,209 752,204 M 754,221 Q 756,211 753,206"/>
+  </g>
+
+  <!-- ===== 全局纸张噪点叠加 ===== -->
+  <rect width="800" height="280" fill="none" filter="url(#paper-noise)" opacity="0.08" pointer-events="none"/>
+</svg>

@@ -1,0 +1,252 @@
+@import "tailwindcss";
+
+/* ============================================================
+   菜市场价格 · 农业调查笔记
+   视觉参考：Vintage Farmers Market Illustration
+   气质：Creamy paper · Storybook hand-drawn ink
+         Striped canopy stall · Soft muted tones
+   底色：奶油白（参考图底色）
+   ============================================================ */
+
+/* ---- JUMBOX 英文字体（本地 OTF） ---- */
+@font-face {
+  font-family: 'JUMBOX';
+  src: url('/fonts/JUMBOX.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---- Handwriting 手写英文字体（本地 TTF） ---- */
+@font-face {
+  font-family: 'Handwriting';
+  src: url('/fonts/Handwriting.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---- 字体 ---- */
+:root {
+  --font-bebas: 'Bebas Neue', sans-serif;
+  --font-oswald: 'Oswald', sans-serif;
+  --font-ibm-plex-mono: 'IBM Plex Mono', monospace;
+  --font-english: 'Special Elite', 'JUMBOX', serif;
+  --font-handwriting: 'Handwriting', 'Noto Serif SC', serif;
+}
+
+/* ---- 色彩系统（奶油白底色） ---- */
+:root {
+  /* 纸张色系 — 奶油白 */
+  --paper-base: #FFFEF7;
+  --paper-light: #FDF8F2;
+  --paper-dark: #F5EDE3;
+  --paper-stain: #EDE4D8;
+
+  /* 墨色系 — 浅棕灰，匹配奶油底 */
+  --ink-primary: #5C5248;
+  --ink-secondary: #8E8276;
+  --ink-muted: #B5A99C;
+  --ink-faint: #D5CCC2;
+
+  /* 棚摊条纹色 — 柔和玫瑰 */
+  --canopy-rose: #D4958A;
+  --canopy-cream: #FDF6EF;
+
+  /* 自然色 — 降低饱和度 */
+  --sage-green: #9BAA7A;
+  --sage-light: #B5C29A;
+  --olive-deep: #7D8B5E;
+  --terracotta: #D48A7A;
+  --terracotta-light: #E0A89A;
+  --burnt-orange: #E0986A;
+  --wood-tan: #DDBE9E;
+  --wood-brown: #B89A7A;
+  --scale-bronze: #9B8E7A;
+
+  /* 功能色 */
+  --price-down: #7D8B5E;
+  --price-down-bg: #EFF3E8;
+  --price-up: #D48A7A;
+  --price-up-bg: #F9EFEA;
+  --price-stable: #9A8E7A;
+  --price-stable-bg: #F2EEE8;
+
+  /* 字体 */
+  --font-display: var(--font-bebas);
+  --font-title: var(--font-oswald);
+  --font-body: 'Noto Serif SC', serif;
+  --font-mono: var(--font-ibm-plex-mono);
+
+  /* 线条 */
+  --rule-color: rgba(180, 170, 155, 0.18);
+  --margin-red: rgba(180, 120, 100, 0.22);
+}
+
+/* ---- 纸张纹理背景 ---- */
+body {
+  background-color: var(--paper-base);
+  color: var(--ink-primary);
+  font-family: var(--font-body), serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  background-image: url("/textures/paper-texture.png");
+  background-size: 512px 512px;
+  background-repeat: repeat;
+  background-attachment: fixed;
+  background-blend-mode: multiply;
+}
+
+/* 纸张边缘暗角 — 极轻 */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse at 50% 0%, transparent 55%, rgba(200, 190, 175, 0.12) 100%),
+    radial-gradient(ellipse at 50% 100%, transparent 60%, rgba(200, 190, 175, 0.10) 100%),
+    radial-gradient(ellipse at 0% 50%, transparent 70%, rgba(200, 190, 175, 0.06) 100%),
+    radial-gradient(ellipse at 100% 50%, transparent 70%, rgba(200, 190, 175, 0.06) 100%);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+}
+
+#root, .page-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- 棚摊条纹装饰（用于卡片/区块） ---- */
+.striped-border {
+  border-top: 8px solid transparent;
+  border-image: repeating-linear-gradient(
+    90deg,
+    var(--canopy-rose) 0px,
+    var(--canopy-rose) 20px,
+    var(--canopy-cream) 20px,
+    var(--canopy-cream) 28px
+  ) 8;
+}
+
+/* ---- 做旧文字 ---- */
+.text-aged {
+  text-shadow:
+    0.5px 0.5px 0px rgba(92, 82, 72, 0.18),
+    0px 0px 1px rgba(92, 82, 72, 0.04);
+}
+.text-aged-heavy {
+  text-shadow:
+    0.8px 0.8px 0px rgba(92, 82, 72, 0.24),
+    0px 0px 2px rgba(92, 82, 72, 0.08),
+    -0.5px 0.5px 0px rgba(180, 170, 150, 0.10);
+}
+
+/* ---- 手绘边框 ---- */
+.border-sketch {
+  border: 1.5px solid rgba(180, 170, 155, 0.45);
+  border-radius: 3px 11px 4px 8px;
+  box-shadow:
+    inset 0 0 0 0.5px rgba(180, 170, 155, 0.06),
+    2px 3px 0px rgba(180, 170, 155, 0.04);
+}
+.border-sketch-heavy {
+  border: 2px solid rgba(170, 155, 140, 0.50);
+  border-radius: 2px 13px 4px 9px;
+  box-shadow:
+    inset 0 0 0 1px rgba(180, 170, 155, 0.05),
+    3px 4px 0px rgba(180, 170, 155, 0.03);
+}
+
+/* ---- 手绘下划线 ---- */
+.underline-sketch {
+  position: relative;
+  text-decoration: none;
+}
+.underline-sketch::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 3px;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 3 Q 20 0.5 40 3 T 80 2.5 T 98 3' fill='none' stroke='%23D4958A' stroke-width='1.5' stroke-linecap='round' opacity='0.5'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+/* ---- 价格数字 — 打字机风格 ---- */
+.price-tag {
+  font-family: var(--font-mono), monospace;
+  font-feature-settings: "tnum";
+  letter-spacing: -0.02em;
+  text-shadow:
+    0.3px 0.3px 0px rgba(92, 82, 72, 0.10),
+    0px 0px 0.5px rgba(92, 82, 72, 0.04);
+}
+
+/* ---- 印章评价标签 ---- */
+.stamp-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 12px;
+  font-family: var(--font-title), var(--font-body), sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border: 1.5px solid currentColor;
+  transform: rotate(-1.5deg);
+  opacity: 0.85;
+  border-radius: 2px 10px 3px 8px;
+  box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.04);
+}
+.stamp-badge-up {
+  transform: rotate(1.5deg);
+}
+
+/* ---- 隐藏滚动条 ---- */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* ---- 选中文字 ---- */
+::selection {
+  background: rgba(212, 149, 138, 0.16);
+  color: var(--ink-primary);
+}
+
+/* ---- 滚动条 ---- */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--paper-base); }
+::-webkit-scrollbar-thumb { background: var(--ink-faint); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--ink-muted); }
+
+/* ---- 页面淡入 ---- */
+@keyframes page-reveal {
+  from { opacity: 0.92; }
+  to { opacity: 1; }
+}
+.page-content {
+  animation: page-reveal 0.5s ease-out;
+}
+
+/* ---- 横幅插画融合 ---- */
+.banner-blend {
+  mix-blend-mode: multiply;
+  filter: contrast(0.96) saturate(0.92);
+}
