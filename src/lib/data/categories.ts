@@ -67,7 +67,7 @@ export async function getCategoriesByCity(cityId: string): Promise<Category[]> {
   for (const row of productData || []) {
     const cat = (row as any).categories;
     if (cat && !categoryMap.has(cat.id)) {
-      categoryMap.set(cat.id, { id: cat.id, name: cat.name, sort_order: cat.sort_order });
+      categoryMap.set(cat.id, { id: cat.id, name: cat.name, slug: cat.slug || '', sort_order: cat.sort_order, created_at: cat.created_at || '' });
     }
   }
   const result = [...categoryMap.values()].sort((a, b) => a.sort_order - b.sort_order);

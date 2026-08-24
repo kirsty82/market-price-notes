@@ -278,7 +278,7 @@ function DetailStamp({ level }: { level: PriceLevel }) {
 
 function WavyLineSketch() {
   return (
-    <svg className="w-5 h-4" viewBox="0 0 20 6" fill="none" stroke="var(--canopy-rose)" strokeWidth="1.2" strokeLinecap="round" opacity="0.5" flexShrink="0">
+    <svg className="w-5 h-4" viewBox="0 0 20 6" fill="none" stroke="var(--canopy-rose)" strokeWidth="1.2" strokeLinecap="round" opacity="0.5" style={{ flexShrink: 0 }}>
       <path d="M1 3 Q 5 0.5 10 3 T 19 3" />
     </svg>
   );
