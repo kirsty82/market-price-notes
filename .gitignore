@@ -71,3 +71,6 @@ miniprogram/project.private.config.json
 
 # dist build output
 dist/
+
+# gh CLI config (stored locally for sandbox)
+.gh-config/
