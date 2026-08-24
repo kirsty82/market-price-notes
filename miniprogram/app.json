@@ -1,0 +1,15 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/detail/detail"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#FDF8F2",
+    "navigationBarTitleText": "菜市场价格农业调查手册",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#FDF8F2"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

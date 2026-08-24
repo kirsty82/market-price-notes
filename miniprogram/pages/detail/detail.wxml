@@ -1,0 +1,73 @@
+<!-- 商品详情页 — 与 Web 版 ProductDetailPage 一致 -->
+<view class="page-content">
+  <view wx:if="{{loading}}" class="state-box">
+    <text class="state-text">翻页中...</text>
+  </view>
+
+  <view wx:elif="{{error}}" class="state-box">
+    <text class="state-text">{{error}}</text>
+    <view class="back-link" bindtap="goBack">← 返回首页</view>
+  </view>
+
+  <view wx:else class="detail-content">
+    <!-- 返回按钮 -->
+    <view class="back-btn" bindtap="goBack">
+      <text class="back-arrow">←</text>
+      <text class="back-label">返回笔记</text>
+    </view>
+
+    <!-- 商品名称 -->
+    <view class="detail-header">
+      <text class="detail-name">{{productName}}</text>
+      <text class="detail-meta">{{cityName}} · {{unit}}</text>
+    </view>
+
+    <!-- 今日价格卡片 -->
+    <view class="price-card">
+      <view class="price-card-strip"></view>
+      <view class="price-card-body">
+        <view class="price-card-left">
+          <text class="price-label">今日价格</text>
+          <view class="price-value-row">
+            <text class="price-value">¥{{latestPrice}}</text>
+            <text class="price-per">/{{unit}}</text>
+          </view>
+          <text class="price-date">更新于 {{latestDate}}</text>
+        </view>
+        <view class="price-card-right">
+          <text class="stamp-badge {{priceLevel === '偏贵' ? 'stamp-expensive' : priceLevel === '正常' ? 'stamp-normal' : 'stamp-cheap'}}">{{priceLevel}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 统计卡片 -->
+    <view class="stat-row">
+      <view class="stat-card">
+        <text class="stat-label">30日均价</text>
+        <text class="stat-value">¥{{avgPrice30d}}</text>
+      </view>
+      <view class="stat-card">
+        <text class="stat-label">波动率</text>
+        <text class="stat-value {{fluctuation > 0 ? 'color-up' : fluctuation < 0 ? 'color-down' : 'color-stable'}}">{{fluctuation > 0 ? '+' : ''}}{{fluctuation}}%</text>
+      </view>
+      <view class="stat-card">
+        <text class="stat-label">趋势</text>
+        <text class="stat-value">{{priceLevel}}</text>
+      </view>
+    </view>
+
+    <!-- 走势图 -->
+    <view wx:if="{{trend.length > 0}}" class="chart-card">
+      <view class="chart-title-row">
+        <text class="chart-title">30日价格走势</text>
+      </view>
+      <canvas type="2d" id="trendCanvas" class="chart-canvas"></canvas>
+    </view>
+
+    <!-- 调查笔记 -->
+    <view class="note-card">
+      <text class="note-title">— Field Notes —</text>
+      <text class="note-text">{{priceLevelReason}}</text>
+    </view>
+  </view>
+</view>

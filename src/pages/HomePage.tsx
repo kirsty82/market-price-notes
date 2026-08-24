@@ -80,7 +80,7 @@ export default function HomePage() {
         {/* 横幅容器 — 全宽无边框，底部渐变融入页面 */}
         <div className="relative w-full mb-4" style={{ marginTop: "-8px" }}>
           <img
-            src="/textures/banner-crayon-v8.jpg"
+            src="/textures/banner-crayon-v9.jpg"
             alt=""
             className="w-full block"
             style={{
@@ -88,11 +88,11 @@ export default function HomePage() {
               maxHeight: "240px",
             }}
           />
-          {/* 底部渐变遮罩 — 让插画融入页面背景 */}
+          {/* 底部渐变遮罩 — 微调边缘，主体融合已在图片内处理 */}
           <div
             className="absolute bottom-0 left-0 right-0 pointer-events-none"
             style={{
-              height: "40px",
+              height: "16px",
               background: "linear-gradient(to bottom, transparent 0%, var(--paper-base) 100%)",
             }}
           />

@@ -1,0 +1,40 @@
+/* ============================================================
+   菜市场价格 · 农业调查笔记 — 全局样式（与 Web 版一致）
+   ============================================================ */
+
+/* CSS 变量 */
+page {
+  --paper-base: #FFFEF7;
+  --paper-light: #FDF8F2;
+  --paper-dark: #F5EDE3;
+  --paper-stain: #EDE4D8;
+
+  --ink-primary: #5C5248;
+  --ink-secondary: #8E8276;
+  --ink-muted: #B5A99C;
+  --ink-faint: #D5CCC2;
+
+  --canopy-rose: #D4958A;
+  --canopy-cream: #FDF6EF;
+
+  --price-down: #5A6B42;
+  --price-down-bg: #EEF2E7;
+  --price-up: #B0453A;
+  --price-up-bg: #F7ECEA;
+  --price-stable: #6B5E50;
+  --price-stable-bg: #F0ECE8;
+
+  --rule-color: rgba(180, 170, 155, 0.18);
+
+  background-color: var(--paper-base);
+  color: var(--ink-primary);
+  font-family: 'Noto Serif SC', serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 隐藏滚动条 */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* 全局字体 */

@@ -44,3 +44,30 @@ crawler/**/__pycache__/
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Trae temp / share
+.trae-html-share-packages/
+.trae/
+
+# WeChat miniprogram private config
+miniprogram/project.private.config.json
+
+# dist build output
+dist/

@@ -1,0 +1,245 @@
+/* 商品详情页 — 与 Web 版 ProductDetailPage 一致 */
+@import "/app.wxss";
+
+/* 页面容器 */
+.page-content {
+  background: var(--paper-base);
+  min-height: 100vh;
+  padding-bottom: 60rpx;
+}
+
+/* 状态提示 */
+.state-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 200rpx 40rpx;
+  gap: 24rpx;
+}
+.state-text {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 28rpx;
+  color: var(--ink-muted);
+}
+.back-link {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 26rpx;
+  color: var(--canopy-rose);
+}
+
+/* 详情内容 */
+.detail-content {
+  padding: 40rpx 32rpx 0;
+}
+
+/* 返回按钮 */
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 24rpx 36rpx;
+  margin-bottom: 32rpx;
+}
+.back-arrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 28rpx;
+  color: var(--canopy-rose);
+  margin-right: 12rpx;
+}
+.back-label {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 28rpx;
+  font-weight: 700;
+  color: var(--canopy-rose);
+  letter-spacing: 0.04em;
+}
+
+/* 商品名称 */
+.detail-header {
+  margin-bottom: 36rpx;
+}
+.detail-name {
+  display: block;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 40rpx;
+  font-weight: 600;
+  color: var(--ink-primary);
+  text-shadow: 0.5px 0.5px 0 rgba(92, 82, 72, 0.16),
+               0 0 2px rgba(92, 82, 72, 0.06);
+}
+.detail-meta {
+  display: block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 22rpx;
+  color: var(--ink-muted);
+  margin-top: 8rpx;
+}
+
+/* 今日价格卡片 */
+.price-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--paper-light);
+  border: 1.5rpx solid var(--rule-color);
+  border-radius: 10rpx;
+  margin-bottom: 36rpx;
+}
+.price-card-strip {
+  height: 8rpx;
+  background: var(--canopy-rose);
+  opacity: 0.3;
+  border-radius: 10rpx 10rpx 0 0;
+}
+.price-card-body {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 32rpx 28rpx;
+}
+.price-card-left {
+  flex: 1;
+}
+.price-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 20rpx;
+  color: var(--ink-muted);
+  letter-spacing: 0.1em;
+}
+.price-value-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8rpx;
+  margin-top: 8rpx;
+}
+.price-value {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 60rpx;
+  font-weight: 600;
+  color: var(--ink-primary);
+  line-height: 1;
+  text-shadow: 0.3px 0.3px 0 rgba(92, 82, 72, 0.1),
+               0 0 1px rgba(92, 82, 72, 0.04);
+}
+.price-per {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 24rpx;
+  color: var(--ink-muted);
+}
+.price-date {
+  display: block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 20rpx;
+  color: var(--ink-muted);
+  margin-top: 8rpx;
+}
+.price-card-right {
+  padding-top: 8rpx;
+}
+
+/* 印章 */
+.stamp-badge {
+  display: inline-flex;
+  padding: 6rpx 28rpx;
+  font-family: 'Oswald', 'Noto Serif SC', sans-serif;
+  font-size: 24rpx;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  border: 3rpx solid;
+  border-radius: 4rpx 20rpx 6rpx 16rpx;
+  transform: rotate(-3deg);
+  opacity: 0.85;
+  box-shadow: 2rpx 2rpx 0 rgba(0, 0, 0, 0.04);
+}
+.stamp-expensive {
+  color: var(--price-up);
+  border-color: var(--price-up);
+  background: var(--price-up-bg);
+  transform: rotate(3deg);
+}
+.stamp-normal {
+  color: var(--price-stable);
+  border-color: var(--price-stable);
+  background: var(--price-stable-bg);
+}
+.stamp-cheap {
+  color: var(--price-down);
+  border-color: var(--price-down);
+  background: var(--price-down-bg);
+}
+
+/* 统计卡片行 */
+.stat-row {
+  display: flex;
+  gap: 16rpx;
+  margin-bottom: 36rpx;
+}
+.stat-card {
+  flex: 1;
+  background: var(--paper-light);
+  border: 1.5rpx solid var(--rule-color);
+  border-radius: 10rpx;
+  padding: 24rpx;
+}
+.stat-label {
+  display: block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 20rpx;
+  color: var(--ink-muted);
+  margin-bottom: 8rpx;
+}
+.stat-value {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 26rpx;
+  font-weight: 600;
+  color: var(--ink-primary);
+}
+.color-up { color: var(--price-up); }
+.color-down { color: var(--price-down); }
+.color-stable { color: var(--price-stable); }
+
+/* 走势图 */
+.chart-card {
+  background: var(--paper-light);
+  border: 1.5rpx solid var(--rule-color);
+  border-radius: 10rpx;
+  padding: 28rpx;
+  margin-bottom: 36rpx;
+}
+.chart-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 24rpx;
+}
+.chart-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 24rpx;
+  color: var(--ink-primary);
+}
+.chart-canvas {
+  width: 100%;
+  height: 400rpx;
+}
+
+/* 调查笔记 */
+.note-card {
+  background: var(--paper-light);
+  border: 1.5rpx solid var(--rule-color);
+  border-radius: 10rpx;
+  padding: 32rpx;
+  margin-bottom: 48rpx;
+}
+.note-title {
+  display: block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 22rpx;
+  color: var(--ink-muted);
+  letter-spacing: 0.1em;
+  margin-bottom: 16rpx;
+}
+.note-text {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 26rpx;
+  color: var(--ink-secondary);
+  line-height: 1.6;
+}

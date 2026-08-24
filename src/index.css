@@ -64,13 +64,13 @@
   --wood-brown: #B89A7A;
   --scale-bronze: #9B8E7A;
 
-  /* 功能色 */
-  --price-down: #7D8B5E;
-  --price-down-bg: #EFF3E8;
-  --price-up: #D48A7A;
-  --price-up-bg: #F9EFEA;
-  --price-stable: #9A8E7A;
-  --price-stable-bg: #F2EEE8;
+  /* 功能色 — 与首页印章颜色一致 */
+  --price-down: #5A6B42;
+  --price-down-bg: #EEF2E7;
+  --price-up: #B0453A;
+  --price-up-bg: #F7ECEA;
+  --price-stable: #6B5E50;
+  --price-stable-bg: #F0ECE8;
 
   /* 字体 */
   --font-display: var(--font-bebas);

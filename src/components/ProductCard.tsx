@@ -3,12 +3,10 @@ import { preloadProductDetail } from "@/lib/data";
 import type { PriceLevel } from "@/lib/supabase/types";
 
 /**
- * 商品卡片 — 手绘噪点按钮风格
- * 完全参照 Uiverse.io 代码：
- *   - button-cosm 曲线装饰始终可见（左侧）
- *   - highlight 荧光笔波浪描边，hover 画出，active 变色
- *   - 静态无动画，保留 hover/active 交互
- * 保留价签文字：编号、分类、品名、价格、30日均、涨跌幅、印章
+ * 商品卡片 — 手绘噪点按钮风格（静态版）
+ * - 左侧曲线装饰始终可见
+ * - 去掉 hover 黄色荧光笔波浪描边动画
+ * - 保留 active 按压反馈
  */
 export default function ProductCard({
   id, name, categoryName, unit, latestPrice, avgPrice30d, fluctuation, priceLevel, cityId, index = 0,
@@ -29,10 +27,7 @@ export default function ProductCard({
 
   return (
     <>
-      {/* ================================================================
-          SVG 手绘噪点滤镜（隐藏 defs）
-          参数完全参照参考代码
-          ================================================================ */}
+      {/* SVG 手绘噪点滤镜 */}
       <svg aria-hidden="true" style={{ position: "absolute", width: 0, height: 0, pointerEvents: "none" }}>
         <defs>
           <filter id={`hd-n-${uid}`}>
@@ -46,9 +41,6 @@ export default function ProductCard({
         </defs>
       </svg>
 
-      {/* ================================================================
-          卡片外层 — overflow:visible 确保曲线不被裁剪
-          ================================================================ */}
       <Link
         to={`/product/${id}?city=${cityId}`}
         onMouseEnter={handleMouseEnter}
@@ -56,12 +48,11 @@ export default function ProductCard({
         className={`block relative card-btn-${uid}`}
         style={{ overflow: "visible" }}
       >
-        {/* ---- 左侧曲线装饰（button-cosm，始终可见） ---- */}
+        {/* 左侧曲线装饰（始终可见，静态） */}
         <svg
           className={`absolute pointer-events-none card-cosm-${uid}`}
           style={{
             fill: "#33333366",
-            transition: "0.3s ease-out",
             scale: "0.32",
             position: "absolute",
             left: 0,
@@ -81,7 +72,7 @@ export default function ProductCard({
           />
         </svg>
 
-        {/* ---- 价签内容容器 ---- */}
+        {/* 价签内容容器 */}
         <div
           className={`relative card-inner-${uid}`}
           style={{
@@ -90,27 +81,10 @@ export default function ProductCard({
             borderRadius: "1.6rem",
             boxShadow: "#33333366 3px 3px 0 1px",
             overflow: "hidden",
+            transition: "box-shadow 0.15s ease",
           }}
         >
-          {/* ---- 荧光笔波浪描边叠层（highlight） ---- */}
-          <svg
-            className={`absolute inset-0 w-full h-full pointer-events-none card-hl-${uid}`}
-            viewBox="0 0 145 78"
-            preserveAspectRatio="none"
-          >
-            <g transform="translate(-171.5, -126.1)">
-              <path
-                d="M180.02826,169.45123c0,0 12.65228,-25.55115 24.2441,-25.66863c6.39271,-0.06479 -5.89143,46.12943 4.90937,50.63857c10.22345,4.2681 24.14292,-52.38336 37.86455,-59.80493c3.31715,-1.79413 -5.35094,45.88889 -0.78872,58.34589c5.19371,14.18125 33.36934,-58.38221 36.43049,-56.91633c4.67078,2.23667 -0.06338,44.42744 5.22574,47.53647c6.04041,3.55065 19.87185,-20.77286 19.87185,-20.77286"
-                fill="none"
-                stroke="rgba(255, 225, 0, 0.5)"
-                strokeWidth="10"
-                strokeLinecap="round"
-                strokeMiterlimit="10"
-              />
-            </g>
-          </svg>
-
-          {/* ---- 内容区 ---- */}
+          {/* 内容区 */}
           <div className="px-4 pt-3 pb-1">
             {/* 票头：编号 · 分类 */}
             <div className="flex items-center justify-between mb-1">
@@ -165,79 +139,29 @@ export default function ProductCard({
         </div>
       </Link>
 
-      {/* ================================================================
-          卡片 CSS — 参照参考代码，静态无动画
-          ================================================================ */}
       <style>{`
         .card-btn-${uid} {
-          transition: 0.3s ease-in-out;
           cursor: pointer;
           user-select: none;
           filter: url(#hd-n-${uid});
         }
 
-        /* highlight 波浪描边默认隐藏 */
-        .card-hl-${uid} {
-          stroke-dasharray: 800;
-          stroke-dashoffset: 800;
-          transition: none;
-        }
-
-        /* ====== 仅鼠标/触控笔设备启用 hover 效果 ======
-           移动端触碰不会触发 hover，避免黄线残留 */
-        @media (hover: hover) and (pointer: fine) {
-          .card-hl-${uid} {
-            transition: stroke-dashoffset 0.5s ease-in-out;
-          }
-          .card-btn-${uid}:hover .card-hl-${uid} {
-            stroke-dashoffset: 0;
-          }
-          .card-btn-${uid}:hover .card-cosm-${uid} {
-            rotate: -15deg;
-            translate: calc(-100% + 54px) 0.9rem;
-          }
-        }
-
-        /* active：按压内阴影 + 描边变色（所有设备通用） */
+        /* active：按压内阴影 */
         .card-btn-${uid}:active .card-inner-${uid} {
           box-shadow: inset #333333f1 3px 3px 0 1px;
         }
-        .card-btn-${uid}:active .card-hl-${uid} {
-          stroke-dashoffset: 800;
-          animation:
-            hl-pulse-${uid} 5s infinite,
-            hl-color-${uid} 0.5s forwards;
-        }
         .card-btn-${uid}:active .card-cosm-${uid} {
           fill: #333333f1;
-          rotate: -135deg;
-          translate: calc(-100% + 58px) 1.1rem;
-          animation: none;
         }
         .card-btn-${uid}:active {
           filter: url(#hd-nt-${uid});
-        }
-
-        @keyframes hl-pulse-${uid} {
-          0%   { stroke-dashoffset: 0; }
-          25%  { stroke-dashoffset: 800; }
-          50%  { stroke-dashoffset: 800; }
-          100% { stroke-dashoffset: 0; }
-        }
-
-        @keyframes hl-color-${uid} {
-          0%   { stroke: rgba(255, 225, 0, 0.5); }
-          100% { stroke: #bc4e2666; }
         }
       `}</style>
     </>
   );
 }
 
-/* ================================================================
-   美式印章 — 三层圆环 + 星点装饰 + 半透明墨迹
-   位置：右下角，略溢出卡片边框
-   ================================================================ */
+/* 美式印章 — 三层圆环 + 星点装饰 */
 function ReceiptStamp({ level }: { level: PriceLevel }) {
   const stampColors: Record<PriceLevel, string> = {
     便宜: "#5A6B42",

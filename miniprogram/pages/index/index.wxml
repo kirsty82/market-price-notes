@@ -1,0 +1,139 @@
+<!-- 菜市场价格查询 — 首页（与 Web 版一致） -->
+<view class="page-content">
+  <!-- 横幅插画 -->
+  <view class="banner-wrap">
+    <image class="banner-img" src="/images/banner.jpg" mode="widthFix" />
+    <view class="banner-fade-bottom"></view>
+    <view class="banner-fade-left"></view>
+    <view class="banner-fade-right"></view>
+  </view>
+
+  <!-- 标题区 -->
+  <view class="header">
+    <view class="header-title">FIELD MARKET</view>
+    <view class="header-subtitle">PRICE NOTES</view>
+    <view class="header-divider">
+      <view class="divider-line"></view>
+      <view class="divider-dot"></view>
+      <view class="divider-line"></view>
+    </view>
+    <view class="header-meta">
+      <text class="header-no">NO. {{dayNum}}</text>
+      <text class="header-dot">·</text>
+      <text class="header-date">{{dateStr}} 星期{{weekDay}}</text>
+      <text class="header-dot">·</text>
+      <text class="header-city">{{selectedCityName}}</text>
+    </view>
+  </view>
+
+  <!-- 城市选择 — 文字按钮 + 手绘下划线（与 Web 版 CitySelector 一致） -->
+  <scroll-view class="city-scroll" scroll-x enable-flex>
+    <view class="city-list">
+      <view
+        wx:for="{{cities}}"
+        wx:key="id"
+        class="city-btn {{currentCityId === item.id ? 'city-btn--active' : ''}}"
+        data-id="{{item.id}}"
+        bindtap="switchCity"
+      >{{item.name}}</view>
+    </view>
+  </scroll-view>
+
+  <!-- 搜索栏 — "Find:" 标签 + 下划线输入框（与 Web 版 SearchBar 一致） -->
+  <view class="find-bar">
+    <text class="find-label">Find:</text>
+    <view class="find-input-wrap">
+      <input
+        class="find-input"
+        placeholder="记录商品名称..."
+        value="{{searchValue}}"
+        bindinput="onSearchInput"
+        bindconfirm="onSearchConfirm"
+        confirm-type="search"
+      />
+    </view>
+  </view>
+
+  <!-- 品类筛选 — 文字按钮 + 选中下划线（与 Web 版 CategoryTabs 一致） -->
+  <scroll-view class="cat-scroll" scroll-x enable-flex>
+    <view class="cat-list">
+      <view
+        class="cat-btn {{currentCategoryId === '' ? 'cat-btn--active' : ''}}"
+        data-id=""
+        bindtap="switchCategory"
+      >全部</view>
+      <view
+        wx:for="{{categories}}"
+        wx:key="id"
+        class="cat-btn {{currentCategoryId === item.id ? 'cat-btn--active' : ''}}"
+        data-id="{{item.id}}"
+        bindtap="switchCategory"
+      >{{item.name}}</view>
+    </view>
+  </scroll-view>
+
+  <!-- Price Ledger 标题 -->
+  <view class="ledger-title">
+    <text class="ledger-label">— Price Ledger —</text>
+    <view class="ledger-line"></view>
+  </view>
+
+  <!-- 商品列表 -->
+  <view class="product-list">
+    <view wx:if="{{loading}}" class="state-box">
+      <text class="state-text">翻页中...</text>
+    </view>
+    <view wx:elif="{{error}}" class="state-box">
+      <text class="state-text">{{error}}</text>
+    </view>
+    <view wx:elif="{{products.length === 0}}" class="state-box">
+      <text class="state-text">暂无调查记录 · 等待数据录入</text>
+    </view>
+    <view wx:else>
+      <view
+        wx:for="{{products}}"
+        wx:key="id"
+        class="product-card"
+        data-id="{{item.id}}"
+        bindtap="goDetail"
+      >
+        <!-- 票头：编号 · 分类 -->
+        <view class="card-header">
+          <text class="card-num">#{{index + 1 < 10 ? '0' + (index + 1) : (index + 1)}}</text>
+          <text class="card-cat">{{item.category_name}}</text>
+        </view>
+        <!-- 品名 -->
+        <view class="card-name">{{item.name}}</view>
+        <!-- 价格 -->
+        <view class="card-price-row">
+          <text class="card-unit">{{item.unit}}</text>
+          <text class="card-price">¥{{item.latest_price}}</text>
+        </view>
+        <!-- 虚线分割 -->
+        <view class="divider-dashed"></view>
+        <!-- 底部信息栏 -->
+        <view class="card-footer">
+          <text class="card-avg">30日均 ¥{{item.avg_price_30d}}</text>
+          <text
+            wx:if="{{item.fluctuation !== null}}"
+            class="card-fluctuation {{item.fluctuation > 0 ? 'fluctuation-up' : item.fluctuation < 0 ? 'fluctuation-down' : 'fluctuation-stable'}}"
+          >{{item.fluctuation > 0 ? '+' : ''}}{{item.fluctuation}}%</text>
+        </view>
+        <!-- 印章 -->
+        <view wx:if="{{item.price_level}}" class="card-stamp">
+          <text class="stamp-badge {{item.price_level === '偏贵' ? 'stamp-expensive' : item.price_level === '正常' ? 'stamp-normal' : 'stamp-cheap'}}">{{item.price_level}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 页脚 -->
+  <view class="footer">
+    <view class="header-divider">
+      <view class="divider-line"></view>
+      <view class="divider-dot"></view>
+      <view class="divider-line"></view>
+    </view>
+    <text class="footer-text">手工记录 · 每日更新 · 数据仅供参考</text>
+  </view>
+</view>

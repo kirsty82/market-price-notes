@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams, Link } from "react-router-dom";
 import { getProductDetail } from "@/lib/data";
-import type { PriceEvaluation, PriceTrend } from "@/lib/supabase/types";
+import type { PriceEvaluation, PriceTrend, PriceLevel } from "@/lib/supabase/types";
 import TrendChart from "@/components/TrendChart";
 
 /**
@@ -76,16 +76,17 @@ export default function ProductDetailPage() {
   const isUp = fluctuation > 0;
   const isDown = fluctuation < 0;
 
-  const priceLevelColors: Record<string, { bg: string; border: string; text: string }> = {
-    便宜: { bg: "var(--price-down-bg)", border: "var(--price-down)", text: "var(--price-down)" },
-    正常: { bg: "var(--price-stable-bg)", border: "var(--price-stable)", text: "var(--price-stable)" },
-    偏贵: { bg: "var(--price-up-bg)", border: "var(--price-up)", text: "var(--price-up)" },
+  // 价格等级颜色
+  const priceLevelColors: Record<PriceLevel, string> = {
+    便宜: "#5A6B42",
+    正常: "#6B5E50",
+    偏贵: "#B0453A",
   };
-  const pc = priceLevelColors[evaluation.price_level];
+  const stampColor = priceLevelColors[evaluation.price_level];
 
   return (
     <div className="page-content min-h-screen max-w-lg mx-auto pt-6 px-4 pb-12" style={{ background: "var(--paper-base)" }}>
-      {/* 返回链接 — CTA 滑出按钮（参照 Uiverse.io alexmaracinaru） */}
+      {/* 返回链接 — CTA 滑出按钮 */}
       <Link to={`/?city=${cityId}`} className="cta-back"
         style={{
           position: "relative",
@@ -98,7 +99,6 @@ export default function ProductDetailPage() {
           textDecoration: "none",
           transition: "all 0.2s ease",
         }}>
-        {/* 模拟 ::before — 圆角方块，hover 展开为全宽 */}
         <span className="cta-bg"
           style={{
             position: "absolute",
@@ -142,19 +142,23 @@ export default function ProductDetailPage() {
         <h1 className="text-aged-heavy text-2xl font-semibold" style={{ fontFamily: "var(--font-body)", color: "var(--ink-primary)" }}>
           {evaluation.product_name}
         </h1>
-        <span className="text-xs mt-1" style={{ fontFamily: "var(--font-mono)", color: "var(--ink-muted)" }}>
+        <span className="text-xs mt-1 block" style={{ fontFamily: "var(--font-mono)", color: "var(--ink-muted)" }}>
           {evaluation.city_name} · {evaluation.unit}
         </span>
       </div>
 
-      {/* 今日价格卡片 */}
-      <div className="relative overflow-hidden p-5 mb-5 rounded-lg" style={{ background: "var(--paper-light)", border: "1px solid var(--rule-color)" }}>
-        <div className="absolute top-0 left-0 right-0 h-2 rounded-t-lg" style={{ background: "var(--canopy-rose)", opacity: 0.3 }} />
+      {/* 今日价格卡片 — 顶部棚摊条纹 + 三层圆形印章 */}
+      <div className="relative overflow-visible p-5 mb-5 rounded-lg" style={{ background: "var(--paper-light)", border: "1px solid var(--rule-color)" }}>
+        {/* 顶部8px棚摊条纹：玫瑰色20px + 奶油色8px */}
+        <div className="absolute top-0 left-0 right-0 h-2 rounded-t-lg" style={{
+          margin: "-1px -1px 0 -1px",
+          background: "repeating-linear-gradient(90deg, var(--canopy-rose) 0px, var(--canopy-rose) 20px, var(--canopy-cream) 20px, var(--canopy-cream) 28px)",
+        }} />
         <div className="flex items-start justify-between">
           <div>
             <span className="text-xs tracking-[0.1em] uppercase" style={{ fontFamily: "var(--font-mono)", color: "var(--ink-muted)" }}>今日价格</span>
             <div className="flex items-baseline gap-1.5 mt-1">
-              <span className="price-tag" style={{ fontFamily: "var(--font-mono)", fontSize: "2.2rem", color: "var(--ink-primary)", fontWeight: 600, lineHeight: 1 }}>
+              <span className="price-tag" style={{ fontFamily: "var(--font-mono)", fontSize: "2rem", color: stampColor, fontWeight: 700, lineHeight: 1 }}>
                 ¥{evaluation.latest_price.toFixed(2)}
               </span>
               <span className="text-sm" style={{ fontFamily: "var(--font-mono)", color: "var(--ink-muted)" }}>/{evaluation.unit}</span>
@@ -163,36 +167,35 @@ export default function ProductDetailPage() {
               更新于 {evaluation.latest_date}
             </span>
           </div>
-          <span className={`stamp-badge ${evaluation.price_level === "偏贵" ? "stamp-badge-up" : ""} mt-2`}
-            style={{ color: pc.text, borderColor: pc.border, background: pc.bg, fontSize: "0.75rem", padding: "4px 14px" }}>
-            {evaluation.price_level}
-          </span>
+          {/* 三层圆形印章 — 与首页一致 */}
+          <DetailStamp level={evaluation.price_level} />
         </div>
       </div>
 
-      {/* 波动率 */}
+      {/* 统计卡片 */}
       <div className="flex gap-3 mb-5">
         <StatCard label="30日均价" value={`¥${evaluation.avg_price_30d.toFixed(2)}`} />
         <StatCard label="波动率" value={`${isUp ? "+" : ""}${fluctuation.toFixed(1)}%`}
           valueColor={isUp ? "var(--price-up)" : isDown ? "var(--price-down)" : "var(--price-stable)"} />
-        <StatCard label="趋势" value={evaluation.price_level} />
+        <StatCard label="趋势" value={evaluation.price_level}
+          valueColor={stampColor} />
       </div>
 
-      {/* 走势图 */}
+      {/* 走势图 — 波浪线装饰 + 标题 */}
       {trend && trend.trend.length > 0 && (
         <div className="p-4 mb-5 rounded-lg" style={{ background: "var(--paper-light)", border: "1px solid var(--rule-color)" }}>
-          <div className="flex items-center gap-2 mb-3">
+          <div className="flex items-center gap-2 mb-2">
             <WavyLineSketch />
             <span className="text-sm" style={{ fontFamily: "var(--font-mono)", color: "var(--ink-primary)" }}>30日价格走势</span>
           </div>
-          <TrendChart data={trend.trend} avgPrice={trend.avg_price} unit={evaluation.unit} />
+          <TrendChart data={trend.trend} avgPrice={trend.avg_price} unit={evaluation.unit} priceLevel={evaluation.price_level} />
         </div>
       )}
 
       {/* 调查笔记 */}
       <div className="p-4 mb-8 rounded-lg" style={{ background: "var(--paper-light)", border: "1px solid var(--rule-color)" }}>
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-sm tracking-[0.1em] uppercase" style={{ fontFamily: "var(--font-mono)", color: "var(--ink-muted)" }}>— Field Notes —</span>
+          <span className="text-xs tracking-[0.1em] uppercase" style={{ fontFamily: "var(--font-mono)", color: "var(--ink-muted)" }}>— Field Notes —</span>
         </div>
         <p className="text-sm leading-relaxed" style={{ fontFamily: "var(--font-body)", color: "var(--ink-secondary)" }}>
           {evaluation.price_level_reason}
@@ -205,29 +208,83 @@ export default function ProductDetailPage() {
 function StatCard({ label, value, valueColor }: { label: string; value: string; valueColor?: string }) {
   return (
     <div className="flex-1 p-3 rounded-lg" style={{ background: "var(--paper-light)", border: "1px solid var(--rule-color)" }}>
-      <span className="block text-xs mb-1" style={{ fontFamily: "var(--font-mono)", color: "var(--ink-muted)" }}>{label}</span>
-      <span className="text-sm font-semibold price-tag" style={{ fontFamily: "var(--font-mono)", color: valueColor || "var(--ink-primary)" }}>{value}</span>
+      <span className="block text-xs mb-1" style={{ fontFamily: "var(--font-mono)", color: "var(--ink-muted)", fontSize: "0.65rem", letterSpacing: "0.08em", textTransform: "uppercase" }}>{label}</span>
+      <span className="text-sm font-bold price-tag" style={{ fontFamily: "var(--font-mono)", color: valueColor || "var(--ink-primary)", fontSize: "0.95rem" }}>{value}</span>
     </div>
   );
 }
 
-function BackArrowSketch() {
+/**
+ * 详情页三层圆形印章 — 与首页 ProductCard 的 ReceiptStamp 样式一致
+ * 外层实线圆(r=23) + 中层虚线圆(r=18, dasharray 3 2.5) + 内层实线圆(r=13)
+ * 8方位小圆点 + 中央文字
+ */
+function DetailStamp({ level }: { level: PriceLevel }) {
+  const stampColors: Record<PriceLevel, string> = {
+    便宜: "#5A6B42",
+    正常: "#6B5E50",
+    偏贵: "#B0453A",
+  };
+  const color = stampColors[level];
+  // 偏贵旋转+3deg，其他-4deg
+  const rotation = level === "偏贵" ? "rotate(3deg)" : level === "便宜" ? "rotate(-4deg)" : "rotate(-2deg)";
+
   return (
-    <svg className="w-4 h-4" viewBox="0 0 16 14" fill="none" stroke="var(--canopy-rose)" strokeWidth="1.3" strokeLinecap="round">
-      <path d="M7 1 L1 7 L7 13" /><line x1="1" y1="7" x2="15" y2="7" />
-    </svg>
+    <div
+      style={{
+        position: "relative",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "48px",
+        height: "48px",
+        transform: rotation,
+        pointerEvents: "none",
+        flexShrink: 0,
+        marginTop: "-0.25rem",
+      }}
+    >
+      <svg viewBox="0 0 50 50" width="48" height="48" style={{ position: "absolute", inset: 0 }} fill="none">
+        <circle cx="25" cy="25" r="23" stroke={color} strokeWidth="2" opacity="0.8" />
+        <circle cx="25" cy="25" r="18" stroke={color} strokeWidth="1" opacity="0.55" strokeDasharray="3 2.5" />
+        <circle cx="25" cy="25" r="13" stroke={color} strokeWidth="1.2" opacity="0.65" />
+        {[
+          [25, 2.5], [25, 47.5], [2.5, 25], [47.5, 25],
+          [9.5, 9.5], [40.5, 9.5], [9.5, 40.5], [40.5, 40.5],
+        ].map(([cx, cy], i) => (
+          <circle key={i} cx={cx} cy={cy} r={1.1} fill={color} opacity="0.65" />
+        ))}
+      </svg>
+      <span
+        style={{
+          fontFamily: "var(--font-english), sans-serif",
+          fontSize: "0.48rem",
+          fontWeight: 700,
+          color: color,
+          textTransform: "uppercase",
+          letterSpacing: "0.06em",
+          opacity: 0.85,
+          lineHeight: 1.2,
+          textAlign: "center",
+          zIndex: 1,
+        }}
+      >
+        {level}
+      </span>
+    </div>
   );
 }
 
 function WavyLineSketch() {
   return (
-    <svg className="w-5 h-4" viewBox="0 0 20 6" fill="none" stroke="var(--canopy-rose)" strokeWidth="1.2" strokeLinecap="round" opacity="0.5">
+    <svg className="w-5 h-4" viewBox="0 0 20 6" fill="none" stroke="var(--canopy-rose)" strokeWidth="1.2" strokeLinecap="round" opacity="0.5" flexShrink="0">
       <path d="M1 3 Q 5 0.5 10 3 T 19 3" />
     </svg>
   );
 }
 
-/** 极简加载动画 — 手绘风格三条波浪线，不遮挡页面 */
+/** 极简加载动画 — 手绘风格三条波浪线 */
 function LoadingSketch() {
   return (
     <div className="flex flex-col items-center gap-3">

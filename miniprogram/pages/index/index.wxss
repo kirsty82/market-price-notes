@@ -1,0 +1,383 @@
+/* ============================================================
+   菜市场价格 · 首页 — 农业调查笔记（与 Web 版一致）
+   ============================================================ */
+@import "/app.wxss";
+
+/* 页面容器 */
+.page-content {
+  background: var(--paper-base);
+  min-height: 100vh;
+  padding-bottom: 60rpx;
+}
+
+/* ---- 横幅 ---- */
+.banner-wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+.banner-img {
+  width: 100%;
+  display: block;
+  mix-blend-mode: multiply;
+}
+.banner-fade-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80rpx;
+  background: linear-gradient(to top, var(--paper-base), transparent);
+}
+.banner-fade-left {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 48rpx;
+  background: linear-gradient(to right, var(--paper-base), transparent);
+}
+.banner-fade-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 48rpx;
+  background: linear-gradient(to left, var(--paper-base), transparent);
+}
+
+/* ---- 标题区 ---- */
+.header {
+  padding: 32rpx 32rpx 20rpx;
+  text-align: center;
+}
+.header-title {
+  font-family: 'Bebas Neue', 'Oswald', sans-serif;
+  font-size: 64rpx;
+  font-weight: 700;
+  color: var(--ink-primary);
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-shadow: 0.5px 0.5px 0 rgba(92, 82, 72, 0.18),
+               0 0 2px rgba(92, 82, 72, 0.08);
+}
+.header-subtitle {
+  font-family: 'Special Elite', 'JUMBOX', serif;
+  font-size: 28rpx;
+  color: var(--ink-muted);
+  letter-spacing: 0.18em;
+  margin-top: 4rpx;
+}
+.header-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16rpx;
+  margin: 16rpx 0;
+}
+.divider-line {
+  width: 40rpx;
+  height: 2rpx;
+  background: var(--ink-faint);
+}
+.divider-dot {
+  width: 8rpx;
+  height: 8rpx;
+  border-radius: 50%;
+  background: var(--canopy-rose);
+  opacity: 0.5;
+}
+.header-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  font-family: 'IBM Plex Mono', 'Noto Serif SC', serif;
+  font-size: 22rpx;
+  color: var(--ink-muted);
+  letter-spacing: 0.04em;
+}
+.header-dot {
+  color: var(--ink-faint);
+}
+
+/* ---- 城市选择 — 文字按钮 + 手绘下划线 ---- */
+.city-scroll {
+  width: 100%;
+  white-space: nowrap;
+}
+.city-list {
+  display: flex;
+  gap: 24rpx;
+  padding: 0 24rpx 12rpx;
+}
+.city-btn {
+  position: relative;
+  font-family: 'Oswald', 'Noto Serif SC', sans-serif;
+  font-size: 30rpx;
+  color: var(--ink-muted);
+  letter-spacing: 0.04em;
+  padding: 8rpx 0;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.city-btn--active {
+  color: var(--ink-primary);
+  font-weight: 600;
+  font-family: 'Bebas Neue', 'Oswald', sans-serif;
+  letter-spacing: 0.06em;
+}
+.city-btn--active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 5rpx;
+  background: var(--canopy-rose);
+  opacity: 0.55;
+  border-radius: 2rpx;
+}
+
+/* ---- 搜索栏 — "Find:" 标签 + 下划线输入框 ---- */
+.find-bar {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  padding: 20rpx 24rpx 16rpx;
+}
+.find-label {
+  font-family: 'Special Elite', 'JUMBOX', serif;
+  font-size: 32rpx;
+  color: var(--ink-muted);
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+.find-input-wrap {
+  flex: 1;
+}
+.find-input {
+  width: 100%;
+  height: 72rpx;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 28rpx;
+  color: var(--ink-primary);
+  background: transparent;
+  border-bottom: 3rpx solid var(--ink-faint);
+  padding: 0;
+  transition: border-color 0.2s;
+}
+.find-input:focus {
+  border-bottom-color: var(--canopy-rose);
+}
+
+/* ---- 品类筛选 — 文字按钮 + 选中下划线 ---- */
+.cat-scroll {
+  width: 100%;
+  white-space: nowrap;
+  border-bottom: 1rpx solid var(--rule-color);
+}
+.cat-list {
+  display: flex;
+  gap: 8rpx;
+  padding: 0 24rpx 12rpx;
+}
+.cat-btn {
+  position: relative;
+  font-family: 'Oswald', 'Noto Serif SC', sans-serif;
+  font-size: 28rpx;
+  color: var(--ink-muted);
+  letter-spacing: 0.04em;
+  padding: 12rpx 24rpx;
+  flex-shrink: 0;
+}
+.cat-btn--active {
+  color: var(--ink-primary);
+  font-weight: 600;
+  font-family: 'Bebas Neue', 'Oswald', sans-serif;
+}
+.cat-btn--active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 5rpx;
+  background: var(--canopy-rose);
+  opacity: 0.55;
+}
+
+/* ---- Price Ledger ---- */
+.ledger-title {
+  padding: 24rpx 24rpx 16rpx;
+}
+.ledger-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 22rpx;
+  color: var(--ink-muted);
+  letter-spacing: 0.1em;
+}
+.ledger-line {
+  margin-top: 8rpx;
+  height: 1rpx;
+  background: var(--rule-color);
+}
+
+/* ---- 状态提示 ---- */
+.state-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 40rpx;
+}
+.state-text {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 28rpx;
+  color: var(--ink-muted);
+}
+
+/* ---- 商品列表 ---- */
+.product-list {
+  padding: 8rpx 24rpx;
+}
+
+/* ---- 商品卡片 ---- */
+.product-card {
+  position: relative;
+  background: var(--paper-light);
+  border: 1.5rpx solid rgba(180, 170, 155, 0.45);
+  border-radius: 6rpx 24rpx 8rpx 16rpx;
+  margin-bottom: 24rpx;
+  padding: 24rpx 28rpx 30rpx;
+  overflow: visible;
+  box-shadow: 2px 3px 0 rgba(180, 170, 155, 0.04),
+              inset 0 0 0 1px rgba(180, 170, 155, 0.06);
+}
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 12rpx;
+}
+.card-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 20rpx;
+  color: var(--ink-muted);
+  letter-spacing: 0.06em;
+}
+.card-cat {
+  font-family: 'Special Elite', 'JUMBOX', serif;
+  font-size: 20rpx;
+  color: var(--canopy-rose);
+  opacity: 0.7;
+  letter-spacing: 0.08em;
+}
+.card-name {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 34rpx;
+  font-weight: 600;
+  color: var(--ink-primary);
+  letter-spacing: 0.04em;
+  margin-bottom: 16rpx;
+  text-shadow: 0.5px 0.5px 0 rgba(92, 82, 72, 0.12),
+               0 0 1px rgba(92, 82, 72, 0.04);
+}
+.card-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8rpx;
+  margin-bottom: 16rpx;
+}
+.card-unit {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 22rpx;
+  color: var(--ink-muted);
+}
+.card-price {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 48rpx;
+  font-weight: 600;
+  color: var(--ink-primary);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  text-shadow: 0.3px 0.3px 0 rgba(92, 82, 72, 0.1),
+               0 0 1px rgba(92, 82, 72, 0.04);
+}
+.divider-dashed {
+  height: 1rpx;
+  background: repeating-linear-gradient(
+    to right,
+    var(--ink-faint) 0,
+    var(--ink-faint) 8rpx,
+    transparent 8rpx,
+    transparent 16rpx
+  );
+  margin-bottom: 14rpx;
+}
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.card-avg {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 22rpx;
+  color: var(--ink-muted);
+}
+.card-fluctuation {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 22rpx;
+  font-weight: 600;
+}
+.fluctuation-up { color: var(--price-up); }
+.fluctuation-down { color: var(--price-down); }
+.fluctuation-stable { color: var(--price-stable); }
+
+/* ---- 印章 ---- */
+.card-stamp {
+  position: absolute;
+  bottom: 12rpx;
+  right: -12rpx;
+}
+.stamp-badge {
+  display: inline-flex;
+  padding: 4rpx 28rpx;
+  font-family: 'Oswald', 'Noto Serif SC', sans-serif;
+  font-size: 24rpx;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  border: 3rpx solid;
+  border-radius: 4rpx 20rpx 6rpx 16rpx;
+  transform: rotate(-3deg);
+  opacity: 0.85;
+  box-shadow: 2rpx 2rpx 0 rgba(0, 0, 0, 0.04);
+}
+.stamp-expensive {
+  color: var(--price-up);
+  border-color: var(--price-up);
+  background: var(--price-up-bg);
+  transform: rotate(3deg);
+}
+.stamp-normal {
+  color: var(--price-stable);
+  border-color: var(--price-stable);
+  background: var(--price-stable-bg);
+}
+.stamp-cheap {
+  color: var(--price-down);
+  border-color: var(--price-down);
+  background: var(--price-down-bg);
+}
+
+/* ---- 页脚 ---- */
+.footer {
+  padding: 48rpx 32rpx 40rpx;
+  text-align: center;
+}
+.footer-text {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 20rpx;
+  color: var(--ink-faint);
+  margin-top: 16rpx;
+  display: block;
+}
